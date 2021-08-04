@@ -1,12 +1,26 @@
 import { ITodo } from "../interface/todo.interface"
+import { useDeleteTodoMutation,useEditTodoMutation } from '../slice/todos/todoSlice';
 
-function TodoItem({id, title, completed}:ITodo) {
+
+function TodoItem({_id, title, completed}:ITodo) {
+
+    const [editTask] = useEditTodoMutation();
+    const [deleteTask] = useDeleteTodoMutation();
+
+    
+    // for adding the line of todo
+    const getStyle = () =>{
+        return {
+            textDecoration: completed ? "line-through": "none"
+        }
+    }
+
     return (
-        <div className='card col-md-8'>
+        <div style={getStyle()} className='card col-md-8'>
             <div className='card-body d-flex justify-content-between'>
-                <input type="checkbox" name="" id="" />
+                <input defaultChecked={completed} onChange={()=> editTask({_id})} type="checkbox" name="" id="" />
                 <p>{title}</p>
-                <button className="btn rounded btn-danger">X</button>
+                <button onClick={()=>deleteTask(_id)} className="btn rounded btn-danger">X</button>
             </div>
         </div>
     )

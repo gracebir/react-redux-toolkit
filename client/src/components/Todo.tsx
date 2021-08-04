@@ -6,7 +6,6 @@ import TodoItem from "./TodoItem";
 function Todo() {
 
     const { data = [], isFetching} = useFetchTodosQuery();
-
     return (
         <div className='d-flex align-items-center flex-column'>
             <AddTodo/>
@@ -18,7 +17,7 @@ function Todo() {
                     <TodoItem 
                     key={i}
                     title={todo.title}
-                    id={todo.id}
+                    _id={todo._id}
                     completed={todo.completed}
                     />
                 ))}
